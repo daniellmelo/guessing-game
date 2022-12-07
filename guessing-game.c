@@ -1,49 +1,41 @@
-// #include <stdio.h>
-
-// int main(){
-
-//     // prints header
-//     printf("********************************\n");
-//     printf("* Welcome to our guessing game *\n");
-//     printf("********************************\n");
-
-
-//     int secret = 42;
-
-//     //printf("Our secret number is %d. Do not tell to anyone! ;)\n", secret);
-
-//     int userNumber;
-
-//     printf("Guess the number: ");
-//     scanf("%d", &userNumber);
-//     printf("You said the secret number is %d\n", userNumber);  
-//     printf("The secret number is %d\n", secret);
-
-//     if (secret == userNumber){
-//         printf("Sucess");
-//     } else {
-//         printf("Failure");
-//     }
-
-
-
-
-
-
-// }
 #include <stdio.h>
- 
-int main() {
-    double n = 3.14159;
-    
-    double raio;
-    
-    scanf("%f", &raio);
-    printf("%f", raio);
-    
-    double area = n * raio*raio;
+#define ATTEMPTS 4
 
-    printf("A=%.4f\n", area);
+int main(){
 
-    return 0;
+
+
+    printf("********************************\n");
+    printf("* Welcome to our guessing game *\n");
+    printf("********************************\n");
+
+    int secret = 42;
+    int userNumber;
+    
+    for (int i = 1; i <= ATTEMPTS; i++){
+        
+        printf("\n------------- Attempt %d of %d -------------\n", i, ATTEMPTS);
+
+        printf("Guess the number: ");
+        scanf("%d", &userNumber);
+        if (userNumber < 0){
+            printf(">>> Negative numbers are not allowed! Try again.");
+            i--;
+            continue;
+        }
+
+        int right = (userNumber==secret);
+        int greaterThen = userNumber > secret;
+
+        if (right){
+            printf(">>> Congratulations!!! You're right!\n The secret number is 42\n");
+            break;
+        }
+            else if (greaterThen){
+                printf(">>> Try again!\n>>> Your attempt was greater then the secret number\n");
+            }
+            else{
+                printf(">>> Try again!\n>>> Your attempt was less then the secret number\n");
+            }
+    }
 }
